@@ -1,0 +1,14 @@
+{
+  "name": "hospital-management-system-root",
+  "version": "1.0.0",
+  "description": "Hospital Management System Root Runner",
+  "scripts": {
+    "dev": "concurrently -n \"BACKEND,FRONTEND\" -c \"blue,green\" \"npm --prefix Hospital-Management-System-MERN-main/backend start\" \"npm --prefix Hospital-Management-System-MERN-main/frontend start\"",
+    "start": "npm run dev",
+    "backend": "npm --prefix Hospital-Management-System-MERN-main/backend start",
+    "frontend": "npm --prefix Hospital-Management-System-MERN-main/frontend start"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
