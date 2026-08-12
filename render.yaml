@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: carepulse-hospital-backend
+    env: node
+    rootDir: Hospital-Management-System-MERN-main/backend
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 5000
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true

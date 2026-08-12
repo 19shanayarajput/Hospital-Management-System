@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
@@ -33,10 +34,19 @@ app.use('/api/admin', require('./routes/admin'));
 app.use('/api/doctor', require('./routes/doctor'));
 app.use('/api/patient', require('./routes/patient'));
 
-// Root route
-app.get('/', (req, res) => {
-  res.send('Welcome to the Hospital Management System API');
-});
+// Serve frontend in production if build exists
+const frontendBuildPath = path.join(__dirname, '../frontend/build');
+if (fs.existsSync(frontendBuildPath)) {
+  app.use(express.static(frontendBuildPath));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(frontendBuildPath, 'index.html'));
+  });
+} else {
+  // Root route fallback for standalone API
+  app.get('/', (req, res) => {
+    res.send('Welcome to the Hospital Management System API');
+  });
+}
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
