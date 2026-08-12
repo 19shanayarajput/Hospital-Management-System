@@ -5,10 +5,14 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const Admin = require('./models/Admin');
 
-const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://shanaya:gungun%401911@token-generate.zahrl4l.mongodb.net/?appName=token-generate';
-mongoose.connect(MONGO_URI)
-.then(() => console.log('Connected to MongoDB'))
-.catch((err) => console.error('Could not connect to MongoDB', err));
+const MONGO_URI = process.env.MONGO_URI;
+if (!MONGO_URI) {
+  console.error('ERROR: MONGO_URI is not defined in environment variables.');
+} else {
+  mongoose.connect(MONGO_URI)
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((err) => console.error('Could not connect to MongoDB', err));
+}
 
 async function createAdmin() {
   const admin = new Admin({

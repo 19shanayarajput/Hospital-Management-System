@@ -11,7 +11,11 @@ const Admin = require('./models/Admin');
 const Appointment = require('./models/Appointment');
 const Prescription = require('./models/Prescription');
 
-const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://shanaya:gungun%401911@token-generate.zahrl4l.mongodb.net/hospital?retryWrites=true&w=majority&appName=token-generate';
+const MONGO_URI = process.env.MONGO_URI;
+if (!MONGO_URI) {
+  console.error('ERROR: MONGO_URI is not defined in environment variables.');
+  process.exit(1);
+}
 
 async function seed() {
   try {

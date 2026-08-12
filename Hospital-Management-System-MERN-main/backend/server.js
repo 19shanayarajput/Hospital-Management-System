@@ -17,10 +17,14 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB connection
-const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://shanaya:gungun%401911@token-generate.zahrl4l.mongodb.net/hospital?retryWrites=true&w=majority&appName=token-generate';
-mongoose.connect(MONGO_URI)
-.then(() => console.log('Connected to MongoDB'))
-.catch((err) => console.error('Could not connect to MongoDB', err));
+const MONGO_URI = process.env.MONGO_URI;
+if (!MONGO_URI) {
+  console.error('ERROR: MONGO_URI is not defined in environment variables.');
+} else {
+  mongoose.connect(MONGO_URI)
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((err) => console.error('Could not connect to MongoDB', err));
+}
 
 // Routes
 app.use('/api/signup', require('./routes/signup'));
