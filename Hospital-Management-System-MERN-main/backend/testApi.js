@@ -31,7 +31,7 @@ async function runTests() {
     console.log(`   Status: ${rootRes.status} -> ${rootRes.data}`);
 
     // 2. Patient Login
-    console.log('\n2. Testing Patient Login (Shanaya Rajput)...');
+    console.log('\n2. Testing Patient Login (Rahul Verma)...');
     const patientLogin = await request({
       host: 'localhost',
       port: 5000,
@@ -39,8 +39,8 @@ async function runTests() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' }
     }, {
-      email: '19shanayarajput@gmail.com',
-      password: 'gungun@1911',
+      email: 'patient.rahul@gmail.com',
+      password: 'patient123',
       role: 'patient'
     });
     console.log(`   Status: ${patientLogin.status} | Role: ${patientLogin.data.role} | Token received: ${!!patientLogin.data.token}`);
